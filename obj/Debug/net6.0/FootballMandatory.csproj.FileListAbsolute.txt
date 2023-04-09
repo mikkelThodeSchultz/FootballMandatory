@@ -1,0 +1,15 @@
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\bin\Debug\net6.0\FootballMandatory.exe
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\bin\Debug\net6.0\FootballMandatory.deps.json
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\bin\Debug\net6.0\FootballMandatory.runtimeconfig.json
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\bin\Debug\net6.0\FootballMandatory.dll
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\bin\Debug\net6.0\FootballMandatory.pdb
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.csproj.AssemblyReference.cache
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.AssemblyInfoInputs.cache
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.AssemblyInfo.cs
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.csproj.CoreCompileInputs.cache
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.dll
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\refint\FootballMandatory.dll
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.pdb
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\FootballMandatory.genruntimeconfig.cache
+C:\Users\Bruger\Desktop\VSC project\CSharp\FootballMandatory\obj\Debug\net6.0\ref\FootballMandatory.dll

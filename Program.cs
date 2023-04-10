@@ -6,20 +6,30 @@ class Program {
 
         string setupFile = "setup.csv";
         string setupFileContent = File.ReadAllText(setupFile);
+        if (setupFileContent.Split(',').Length != 6){
+            throw new ArgumentException("Invalid input file format: The setup.csv file should have 6 rows.");
+        }
+        string[] splitSetupFileContent = setupFileContent.Split(',');
+        string leagueName = splitSetupFileContent[0];
 
-        string leagueName = setupFileContent.Split(',')[0];
-        int positionsToChampionsLeague = int.Parse(setupFileContent.Split(',')[1]);
-        int positionsToEuropeLeague = int.Parse(setupFileContent.Split(',')[2]);
-        int positionsToConferenceLeague = int.Parse(setupFileContent.Split(',')[3]);
-        int positionsToUpperLeague = int.Parse(setupFileContent.Split(',')[4]);
-        int positionsToLowerLeague = int.Parse(setupFileContent.Split(',')[5]);
+        if (int.TryParse(splitSetupFileContent[1], out int var1) && int.TryParse(splitSetupFileContent[2], out int var2) && int.TryParse(splitSetupFileContent[3], out int var3)
+            && int.TryParse(splitSetupFileContent[4], out int var4) && int.TryParse(splitSetupFileContent[5], out int var5)){
+            int positionsToChampionsLeague = var1;
+            int positionsToEuropeLeague = var2;
+            int positionsToConferenceLeague = var3;
+            int positionsToUpperLeague = var4;
+            int positionsToLowerLeague = var5;
 
-        Console.WriteLine("League Name: {0}", leagueName);
-        Console.WriteLine("Positions to Champions League: {0}", positionsToChampionsLeague);
-        Console.WriteLine("Positions to Europe League: {0}", positionsToEuropeLeague);
-        Console.WriteLine("Positions to Conference League: {0}", positionsToConferenceLeague);
-        Console.WriteLine("Positions to Upper League: {0}", positionsToUpperLeague);
-        Console.WriteLine("Positions to Lower League: {0}", positionsToLowerLeague);
+            Console.WriteLine("League Name: {0}", leagueName);
+            Console.WriteLine("Positions to Champions League: {0}", positionsToChampionsLeague);
+            Console.WriteLine("Positions to Europe League: {0}", positionsToEuropeLeague);
+            Console.WriteLine("Positions to Conference League: {0}", positionsToConferenceLeague);
+            Console.WriteLine("Positions to Upper League: {0}", positionsToUpperLeague);
+            Console.WriteLine("Positions to Lower League: {0}", positionsToLowerLeague);
+
+        } else {
+            throw new FormatException("The setup.csv file is not valid");
+        }
 
         string teamsFile = "teams.csv";
         List<Team> teams = new List<Team>();
@@ -28,6 +38,9 @@ class Program {
             while (!reader.EndOfStream) {
                 string? line = reader.ReadLine();
                 string[] fields = line?.Split(',') ?? new string[0];
+                if (fields.Length != 3) {
+                    throw new ArgumentException("Invalid input file format: Each team should have 3 rows");
+                }
                 Team team = new Team(fields[0], fields[1], fields[2]);
                 teams.Add(team);
             }
@@ -39,15 +52,27 @@ class Program {
         string roundFilePath = Path.Combine("rounds", $"round{i}.csv");
         string[] roundLines = File.ReadAllLines(roundFilePath);
 
-
             foreach (string line in roundLines)
             {
                 string[] values = line.Split(',');
+                if (values.Length != 4) {
+                    throw new ArgumentException("Invalid input file format: Each round should have 4 rows. Exception thrown in round " + i);
+                }
                 
                 string homeTeamAbbriviation = values[0];
-                int homeTeamScore = int.Parse(values[2]);
                 string awayTeamAbbreviation = values[1];
-                int awayTeamScore = int.Parse(values[3]);
+                int homeTeamScore = -1;
+                int awayTeamScore = -1;
+                if (int.TryParse(values[2], out int homeTeamValue)){
+                    homeTeamScore = homeTeamValue;
+                } else {
+                    throw new FormatException("The home team score is not valid in round: " +  i +  ". " + line);
+                }
+                if (int.TryParse(values[3], out int awayTeamValue)){
+                awayTeamScore = awayTeamValue;
+                } else {
+                    throw new FormatException("The away team score is not valid in round: " +  i +  ". " + line);
+                }
 
                 Team? homeTeam = teams.Find(t => t.Abbreviation == homeTeamAbbriviation);
                 Team? awayTeam = teams.Find(t => t.Abbreviation == awayTeamAbbreviation);
@@ -94,7 +119,6 @@ class Program {
             }
         }
 
-
         var standings = teams.OrderByDescending(t => t.Points)
                     .ThenByDescending(t => t.GoalDifference)
                     .ThenByDescending(t => t.GoalsFor)
@@ -136,7 +160,7 @@ class Program {
                     break;
             }
 
-            if(team.Streak.Count >4){
+            if(team.Streak.Count > 4){
                 List<string> lastFive = team.Streak.GetRange(team.Streak.Count - 5, 5);
                 bool allSame = lastFive.All(x => x == lastFive[0]);
                 if(allSame){
